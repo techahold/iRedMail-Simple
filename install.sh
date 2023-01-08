@@ -1,12 +1,13 @@
 #!/bin/bash
 
+rel=$(curl https://github.com/iredmail/iRedMail/tags -s | grep 'tool-tip for="toggle-commit-'| awk '{print substr($3, 20, 5) }')
+iRMLATEST=$(echo $rel | awk '{print substr($1, 1) }')
+
 echo "Updating and Installing dependencys"
 sudo apt update && apt -y upgrade
 sudo apt install -y dialog
 
-echo "Installing latest version of iRedMail iRedmail"
-rel=$(curl https://github.com/iredmail/iRedMail/tags -s | grep 'tool-tip for="toggle-commit-'| awk '{print substr($3, 20, 5) }')
-iRMLATEST=$(echo $rel | awk '{print substr($1, 1) }')
+echo "Installing iRedMail ${iRMLATEST} the most current version"
 wget "https://github.com/iredmail/iRedMail/archive/refs/tags/${iRMLATEST}.tar.gz"
 tar zxf ${iRMLATEST}.tar.gz
 cd iRed*
