@@ -2,6 +2,8 @@
 
 rel=$(curl https://github.com/iredmail/iRedMail/tags -s | grep 'tool-tip for="toggle-commit-'| awk '{print substr($3, 20, 5) }')
 iRMLATEST=$(echo $rel | awk '{print substr($1, 1) }')
+hostname=$(hostname -f)
+domain=$(hostname -d)
 
 echo "Updating and Installing dependencys"
 sudo apt update && apt -y upgrade
@@ -15,8 +17,14 @@ sudo chmod +x iRedMail.sh
 rm -rf ../${iRMLATEST}.tar.gz
 ./iRedmail.sh
 
-echo "Take a note of your settings now"
-sudo amavisd-new showkeys
+echo "Your SPF Record should be set as"
+echo "${hostname}.   3600    IN  TXT "v=spf1 mx -all""
+
+echo "To Configure autodiscover add the following DNS Records"
+echo "autodiscover.${domain}.   10          mx      ${hostname}."
+echo "autoconfig.${domain}.   10          mx      ${hostname}."
+
+echo "Please take a note of your settings now"
 read -p "Press [Enter] once you have copied this output..."
 
 echo "Installing latest version of iRedMail Admin"
@@ -34,7 +42,6 @@ sudo amavisd-new showkeys
 read -p "Press [Enter] once you have copied this output..."
 
 echo "Installing SSL certs and rebooting"
-hostname=$(hostname -f)
 sudo apt install -y certbot python3-certbot-nginx
 sudo certbot --nginx -d ${hostname}
 sudo mv /etc/ssl/certs/iRedMail.crt{,.bak}
