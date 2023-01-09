@@ -24,7 +24,10 @@ echo "To Configure autodiscover add the following DNS Records"
 echo "autodiscover.${domain}.   10          mx      ${hostname}."
 echo "autoconfig.${domain}.   10          mx      ${hostname}."
 
-echo "Please take a note of your settings now"
+echo "Your DKIM Key is"
+sudo amavisd-new showkeys
+
+echo "Please take a note of your settings now (you might need to scroll up)."
 read -p "Press [Enter] once you have copied this output..."
 
 echo "Installing latest version of iRedMail Admin"
@@ -36,10 +39,6 @@ cd iRedAdmin*/tools
 sudo chmod +x upgrade_iredadmin.sh
 rm -rf ../${iRMADM}.tar.gz
 ./upgrade_iredadmin.sh
-
-echo "Add DKIM Key to your DNS as a TXT Record"
-sudo amavisd-new showkeys
-read -p "Press [Enter] once you have copied this output..."
 
 echo "Installing SSL certs and rebooting"
 sudo apt install -y certbot python3-certbot-nginx
