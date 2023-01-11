@@ -15,7 +15,7 @@ tar zxf ${iRMLATEST}.tar.gz
 cd iRed*
 sudo chmod +x iRedMail.sh
 rm -rf ../${iRMLATEST}.tar.gz
-./iRedmail.sh
+./iRedMail.sh
 
 echo "Your SPF Record should be set as"
 echo "${hostname}.   3600    IN  TXT "v=spf1 mx -all""
