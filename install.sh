@@ -47,4 +47,5 @@ sudo mv /etc/ssl/certs/iRedMail.crt{,.bak}
 sudo mv /etc/ssl/private/iRedMail.key{,.bak}
 sudo ln -sf /etc/letsencrypt/live/mail.flonix.ml/fullchain.pem /etc/ssl/certs/iRedMail.crt
 sudo ln -sf  /etc/letsencrypt/live/mail.flonix.ml/privkey.pem /etc/ssl/private/iRedMail.key
+read -p "Press [Enter] When you are ready to reboot"
 sudo reboot
