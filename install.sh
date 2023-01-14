@@ -45,7 +45,7 @@ sudo apt install -y certbot python3-certbot-nginx
 sudo certbot certonly --webroot --agree-tos --email info@${domain} -d ${hostname} -w /var/www/html/
 sudo mv /etc/ssl/certs/iRedMail.crt{,.bak}
 sudo mv /etc/ssl/private/iRedMail.key{,.bak}
-sudo ln -sf /etc/letsencrypt/live/mail.flonix.ml/fullchain.pem /etc/ssl/certs/iRedMail.crt
-sudo ln -sf  /etc/letsencrypt/live/mail.flonix.ml/privkey.pem /etc/ssl/private/iRedMail.key
+sudo ln -sf /etc/letsencrypt/live/${hostname}/fullchain.pem /etc/ssl/certs/iRedMail.crt
+sudo ln -sf  /etc/letsencrypt/live/${hostname}/privkey.pem /etc/ssl/private/iRedMail.key
 read -p "Press [Enter] When you are ready to reboot"
 sudo reboot
