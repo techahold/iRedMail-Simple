@@ -13,3 +13,15 @@ chmod +x install.sh
 ```
 
 Been Tested on Debian 11 and Ubuntu 20.04
+
+# Restricting access to admin & sogo webinterface
+Under certain circumstances you may want to limit access to the Sogo & Admin interface to certain IP addresses. This can be solved via Nginx templates.
+
+Add the following content to the following files:
+allow YOUR-IP;
+deny all;
+
+For admin interface:
+/etc/nginx/templates -> iredadmin.tmpl
+For SoGo Webmail:
+/etc/nginx/templates -> sogo.tmpl
